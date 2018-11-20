@@ -7,7 +7,6 @@ const fs = require('fs');
 
 const db = require('./lib/local/db');
 const log = require('./lib/local/log');
-const publicKey = fs.readFileSync('./config/smartthings_rsa.pub', 'utf8');
 const httpSignature = require('http-signature');
 
 const configurationLifecycle = require('./lib/lifecycle/configuration');
@@ -15,6 +14,9 @@ const oauthLifecycle = require('./lib/lifecycle/oauth');
 const crudLifecycle = require('./lib/lifecycle/crud');
 const eventLifecycle = require('./lib/lifecycle/event');
 
+// UNCOMMENT THE FOLLOWING IN PRODUCTION
+// const publicKey = fs.readFileSync('./config/smartthings_rsa.pub', 'utf8');
+// END WARNING
 
 const app = module.exports = express();
 app.use(bodyParser.json());
@@ -32,6 +34,11 @@ function callbackHandler(req, response) {
 }
 
 function signatureIsVerified(req) {
+    // WARNING: DO NOT USE THIS IN PRODUCTION
+    // We will read the public key from FS everytime we need to verify
+    // COMMENT OUT THIS LINE INPRODUCTION
+    const publicKey = fs.readFileSync('./config/smartthings_rsa.pub', 'utf8');
+    // END WARNING
     try {
         let parsed = httpSignature.parseRequest(req);
         if (!httpSignature.verifySignature(parsed, publicKey)) {

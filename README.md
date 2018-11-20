@@ -79,7 +79,7 @@ devices page. Click _Create_ to start the process of creating a device profile a
     07. Click on your entry in the list and select the _Device info._ tab and paste the _Device profile ID_ field into
     the `config/default.json` file in the `"deviceProfiles": {"color": ""}` entry.
     
-9. Stop and restart the server: `CTRL-C`, `npm start`.
+9. **Optional** Stop and restart the server: `CTRL-C`, `npm start`.
 10. On the _Devices_ page of the SmartThings mobile app tap _ADD DEVICES_, tap _ADD DEVICE MANUALLY_ and then select your device from 
 _My Testing Devices_ at the bottom of the page (you can also install the devices in the ST Classic app from Marketplace -> SmartApps -> My Apps). 
 11. If you have configured your server for OAuth with _clientId_ and _clientSecret_ from LIFX, you will be prompted to connect to the LIFX
